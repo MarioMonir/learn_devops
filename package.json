@@ -1,0 +1,8 @@
+{
+  "name": "learn_devops",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:MarioMonir/learn_devops.git",
+  "author": "MarioMonir <mario3monir@gmail.com>",
+  "license": "MIT"
+}
