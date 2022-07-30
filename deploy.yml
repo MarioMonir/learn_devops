@@ -1,0 +1,9 @@
+- name : Run Ansible Deploy 
+  hosts: all
+  become: true
+
+  # - - - - - - - - - - - - - - - - - -
+
+  tasks:
+    - name: Server Meta Data
+      debug: msg="{{ ansible_distribution }} / {{ ansible_os_family }}"

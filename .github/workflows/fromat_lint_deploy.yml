@@ -1,9 +1,5 @@
 ---
-#################################
-#################################
 ## Super Linter GitHub Actions ##
-#################################
-#################################
 name: Prettify Then Lint Code Base
 
 #
@@ -11,9 +7,10 @@ name: Prettify Then Lint Code Base
 # https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 #
 
-#############################
+
+# - - - - - - - - - - - - - - - - - - - - - - - - 
+
 # Start the job on all push #
-#############################
 on:
   push:
     branches: [master, main]
@@ -22,46 +19,62 @@ on:
   pull_request:
     branches: [master, main]
 
-###############
+
+# - - - - - - - - - - - - - - - - - - - - - - - - 
+
 # Set the Job #
-###############
 jobs:
-  build:
-    # Name the Job
-    name: Lint Code Base
-    # Set the agent to run on
+  pretty_lint:
+    name: Prettify and Lint Code Base
     runs-on: ubuntu-latest
 
-    ##################
-    # Load all steps #
-    ##################
     steps:
-      ##########################
       # Checkout the code base #
-      ##########################
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
           
+      # ~  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    
 
-      ################################
-      # Run Linter against code base #
-      ################################
+      # Run Prettier against code base #
       - name: Prettify code
         uses: creyD/prettier_action@v4.2
         with:
           # This part is also where you can pass other options, for example:
           prettier_options: --write **/*.{js,md}
      
+      # ~  ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
 
-      ################################
+
       # Run Linter against code base #
-      ################################
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
+  # - - - - - - - - - - - - - - - - - - - - - 
+  
+  ansible_deploy:
+    - name: Deplpoy by ansible playbook deploy.yml
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: deploy ansible 
+  
+        directory: ./
+
+        inventory: |
+          [all]
+          techhive-ubuntu-2 ansible_host=15.188.3.194
+
+  
+
+    
+
+
