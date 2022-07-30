@@ -61,17 +61,17 @@ jobs:
 
   # - - - - - - - - - - - - - - - - - - - - - 
   
-  ansible_deploy:
-    - name: Deplpoy by ansible playbook deploy.yml
-      uses: dawidd6/action-ansible-playbook@v2
-      with:
-        playbook: deploy ansible 
+  # ansible_deploy:
+  #   - name: Deplpoy by ansible playbook deploy.yml
+  #     uses: dawidd6/action-ansible-playbook@v2
+  #     with:
+  #       playbook: deploy ansible 
   
-        directory: ./
+  #       directory: ./
 
-        inventory: |
-          [all]
-          techhive-ubuntu-2 ansible_host=15.188.3.194
+  #       inventory: |
+  #         [all]
+  #         techhive-ubuntu-2 ansible_host=15.188.3.194
 
   
 
